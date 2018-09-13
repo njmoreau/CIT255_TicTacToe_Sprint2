@@ -322,8 +322,7 @@ namespace CodingActivity_TicTacToe_ConsoleGame
 
                 for (int j = 0; j < 3; j++)
                 {
-                    Console.Write("\t\t\t        | ");
-
+                    
                     for (int k = 0; k < 3; k++)
                     {
                         if (_gameboard.PositionState[i, j, k] == Gameboard.PlayerPiece.None)
