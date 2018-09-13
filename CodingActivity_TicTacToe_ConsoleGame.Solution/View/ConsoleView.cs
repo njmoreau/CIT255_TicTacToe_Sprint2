@@ -314,11 +314,11 @@ namespace CodingActivity_TicTacToe_ConsoleGame
             //
             Console.SetCursorPosition(0, GAMEBOARD_VERTICAL_LOCATION);
 
-            Console.Write("\t\t\t        |---+---+---|\n");
+            Console.Write("\t\t        |---+---+---|\t|---+---+---|\t|---+---+---|\n");
 
             for (int i = 0; i < 3; i++)
             {
-                Console.Write("\t\t\t        | ");
+                Console.Write("\t\t\t|   |   | ");
 
                 for (int j = 0; j < 3; j++)
                 {
@@ -337,7 +337,7 @@ namespace CodingActivity_TicTacToe_ConsoleGame
                     }
                 }
 
-                Console.Write("\n\t\t\t        |---+---+---|\n");
+                Console.Write("\n\t\t\t|---+---+---|\t|---+---+---|\t|---+---+---|\n");
             }
 
         }
