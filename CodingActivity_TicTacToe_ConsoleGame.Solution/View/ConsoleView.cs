@@ -322,15 +322,20 @@ namespace CodingActivity_TicTacToe_ConsoleGame
 
                 for (int j = 0; j < 3; j++)
                 {
-                    if (_gameboard.PositionState[i, j] == Gameboard.PlayerPiece.None)
-                    {
-                        Console.Write(" " + " | ");
-                    }
-                    else
-                    {
-                        Console.Write(_gameboard.PositionState[i, j] + " | ");
-                    }
+                    Console.Write("\t\t\t        | ");
 
+                    for (int k = 0; k < 3; k++)
+                    {
+                        if (_gameboard.PositionState[i, j, k] == Gameboard.PlayerPiece.None)
+                        {
+                            Console.Write(" " + " | ");
+                        }
+                        else
+                        {
+                            Console.Write(_gameboard.PositionState[i, j, k] + " | ");
+                        }
+
+                    }
                 }
 
                 Console.Write("\n\t\t\t        |---+---+---|\n");
@@ -407,7 +412,7 @@ namespace CodingActivity_TicTacToe_ConsoleGame
             //
             // Initialize gameboardPosition with -1 values
             //
-            GameboardPosition gameboardPosition = new GameboardPosition(-1, -1);
+            GameboardPosition gameboardPosition = new GameboardPosition(-1, -1, -1);
 
             //
             // Get row number from player.
