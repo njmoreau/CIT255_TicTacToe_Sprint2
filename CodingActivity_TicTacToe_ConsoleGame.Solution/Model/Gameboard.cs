@@ -36,7 +36,7 @@ namespace CodingActivity_TicTacToe_ConsoleGame
 
         private const int MAX_NUM_OF_ROWS_COLUMNS = 3;
 
-        private PlayerPiece[,] _positionState;
+        private PlayerPiece[,,] _positionState;
 
         private GameboardState _currentRoundState;
 
@@ -49,7 +49,7 @@ namespace CodingActivity_TicTacToe_ConsoleGame
             get { return MAX_NUM_OF_ROWS_COLUMNS; }
         }
 
-        public PlayerPiece[,] PositionState
+        public PlayerPiece[,,] PositionState
         {
             get { return _positionState; }
             set { _positionState = value; }
@@ -66,7 +66,7 @@ namespace CodingActivity_TicTacToe_ConsoleGame
 
         public Gameboard()
         {
-            _positionState = new PlayerPiece[MAX_NUM_OF_ROWS_COLUMNS, MAX_NUM_OF_ROWS_COLUMNS];
+            _positionState = new PlayerPiece[MAX_NUM_OF_ROWS_COLUMNS, MAX_NUM_OF_ROWS_COLUMNS, MAX_NUM_OF_ROWS_COLUMNS];
 
             InitializeGameboard();
         }
@@ -89,7 +89,10 @@ namespace CodingActivity_TicTacToe_ConsoleGame
             {
                 for (int column = 0; column < MAX_NUM_OF_ROWS_COLUMNS; column++)
                 {
-                    _positionState[row, column] = PlayerPiece.None;
+                    for (int depth = 0; depth < MAX_NUM_OF_ROWS_COLUMNS; depth++)
+                    {
+                        _positionState[row, column,depth] = PlayerPiece.None;
+                    }
                 }
             }
         }
@@ -107,7 +110,7 @@ namespace CodingActivity_TicTacToe_ConsoleGame
             // Note: gameboardPosition converted to array index by subtracting 1
             //
 
-            if (_positionState[gameboardPosition.Row - 1, gameboardPosition.Column - 1] == PlayerPiece.None)
+            if (_positionState[gameboardPosition.Row - 1, gameboardPosition.Column - 1, gameboardPosition.Depth-1] == PlayerPiece.None)
             {
                 return true;
             }
@@ -151,9 +154,12 @@ namespace CodingActivity_TicTacToe_ConsoleGame
             {
                 for (int column = 0; column < 3; column++)
                 {
-                    if (_positionState[row, column] == PlayerPiece.None)
+                    for (int depth = 0; depth < 3; depth++)
                     {
-                        return false;
+                        if (_positionState[row, column, depth] == PlayerPiece.None)
+                        {
+                            return false;
+                        }
                     }
                 }
             }
@@ -167,6 +173,10 @@ namespace CodingActivity_TicTacToe_ConsoleGame
         /// <returns>true if a player has won</returns>
         private bool ThreeInARow(PlayerPiece playerPieceToCheck)
         {
+            // DEBUG
+            return false;
+
+            /*
             //
             // Check rows for player win
             //
@@ -213,7 +223,7 @@ namespace CodingActivity_TicTacToe_ConsoleGame
             // No Player Has Won
             //
 
-            return false;
+            return false;*/
         }
 
         /// <summary>
@@ -227,7 +237,7 @@ namespace CodingActivity_TicTacToe_ConsoleGame
             // Row and column value adjusted to match array structure
             // Note: gameboardPosition converted to array index by subtracting 1
             //
-            _positionState[gameboardPosition.Row - 1, gameboardPosition.Column - 1] = PlayerPiece;
+            _positionState[gameboardPosition.Row - 1, gameboardPosition.Column - 1, gameboardPosition.Depth-1] = PlayerPiece;
 
             //
             // Change game board state to next player
