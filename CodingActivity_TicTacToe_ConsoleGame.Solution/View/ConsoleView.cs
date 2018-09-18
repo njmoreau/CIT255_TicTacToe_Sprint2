@@ -318,23 +318,28 @@ namespace CodingActivity_TicTacToe_ConsoleGame
 
             for (int i = 0; i < 3; i++)
             {
-                Console.Write("\t\t\t|   |   | ");
+                Console.Write("\t\t\t| ");
 
                 for (int j = 0; j < 3; j++)
                 {
                     
                     for (int k = 0; k < 3; k++)
                     {
-                        if (_gameboard.PositionState[i, k, j] == Gameboard.PlayerPiece.None)
+                        if (_gameboard.PositionState[k, i, j] == Gameboard.PlayerPiece.None)
                         {
                             Console.Write(" " + " | ");
                         }
                         else
                         {
-                            Console.Write(_gameboard.PositionState[i, k, j] + " | ");
+                            Console.Write(_gameboard.PositionState[k, i, j] + " | ");
                         }
 
                     }
+                    if (j < 2)
+                    {
+                        Console.Write("\t| ");
+                    }
+                    
                 }
 
                 Console.Write("\n\t\t\t|---+---+---|\t|---+---+---|\t|---+---+---|\n");
