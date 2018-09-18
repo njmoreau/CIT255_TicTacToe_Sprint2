@@ -81,7 +81,7 @@ namespace CodingActivity_TicTacToe_ConsoleGame
             Console.BackgroundColor = ConsoleConfig.bodyBackgroundColor;
             Console.ForegroundColor = ConsoleConfig.bodyBackgroundColor;
 
-            ConsoleUtil.WindowTitle = "The Tic-tac-toe Game";
+            ConsoleUtil.WindowTitle = "Tic-Tac-Toe Cubed";
         }
 
         /// <summary>
@@ -176,10 +176,10 @@ namespace CodingActivity_TicTacToe_ConsoleGame
         {
             StringBuilder sb = new StringBuilder();
 
-            ConsoleUtil.HeaderText = "The Tic-tac-toe Game";
+            ConsoleUtil.HeaderText = "Tic-Tac-Toe Cubed";
             ConsoleUtil.DisplayReset();
 
-            ConsoleUtil.DisplayMessage("Written by John Velis");
+            ConsoleUtil.DisplayMessage("Written by John Velis. Revamped by Nate, Nick, and Keegan");
             ConsoleUtil.DisplayMessage("Northwestern Michigan College");
             Console.WriteLine();
 
@@ -202,7 +202,7 @@ namespace CodingActivity_TicTacToe_ConsoleGame
         /// </summary>
         public void DisplayClosingScreen()
         {
-            ConsoleUtil.HeaderText = "The Tic-tac-toe Game";
+            ConsoleUtil.HeaderText = "Tic-Tac-Toe Cubed";
             ConsoleUtil.DisplayReset();
 
             ConsoleUtil.DisplayMessage("Thank you for using The Tic-tac-toe Game.");
@@ -325,13 +325,13 @@ namespace CodingActivity_TicTacToe_ConsoleGame
                     
                     for (int k = 0; k < 3; k++)
                     {
-                        if (_gameboard.PositionState[i, j, k] == Gameboard.PlayerPiece.None)
+                        if (_gameboard.PositionState[i, k, j] == Gameboard.PlayerPiece.None)
                         {
                             Console.Write(" " + " | ");
                         }
                         else
                         {
-                            Console.Write(_gameboard.PositionState[i, j, k] + " | ");
+                            Console.Write(_gameboard.PositionState[i, k, j] + " | ");
                         }
 
                     }
@@ -424,6 +424,11 @@ namespace CodingActivity_TicTacToe_ConsoleGame
             if (CurrentViewState != ViewState.PlayerUsedMaxAttempts)
             {
                 gameboardPosition.Column = PlayerCoordinateChoice("Column");
+
+                if (CurrentViewState != ViewState.PlayerUsedMaxAttempts)
+                {
+                    gameboardPosition.Depth = PlayerCoordinateChoice("Depth");
+                }
             }
 
             return gameboardPosition;
