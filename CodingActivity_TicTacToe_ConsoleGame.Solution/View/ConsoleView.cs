@@ -421,7 +421,7 @@ namespace CodingActivity_TicTacToe_ConsoleGame
         /// <summary>
         /// Displays the menu
         /// </summary>
-        private void DisplayMenu()
+        public void DisplayMenu()
         {
             DisplayNewRoundPrompt();
             DisplayCurrentGameStatus();
