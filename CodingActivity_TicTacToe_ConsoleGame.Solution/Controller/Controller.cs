@@ -14,6 +14,7 @@ namespace CodingActivity_TicTacToe_ConsoleGame
         //
         private bool _playingGame;
         private bool _playingRound;
+        private bool _usingMenu;
 
         private int _roundNumber;
 
@@ -30,6 +31,11 @@ namespace CodingActivity_TicTacToe_ConsoleGame
         //
         private static Gameboard _gameboard = new Gameboard();
         private static ConsoleView _gameView = new ConsoleView(_gameboard);
+
+        //
+        //Instantiate the Game Menu
+        //
+        private static MenuOption _gameMenu = new MenuOption();
 
         #endregion
 
@@ -59,8 +65,9 @@ namespace CodingActivity_TicTacToe_ConsoleGame
             //
             // Initialize game variables
             //
-            _playingGame = true;
-            _playingRound = true;
+            _usingMenu = true;
+            _playingGame = false;
+            _playingRound = false;
             _roundNumber = 0;
             _playerONumberOfWins = 0;
             _playerXNumberOfWins = 0;
@@ -79,6 +86,46 @@ namespace CodingActivity_TicTacToe_ConsoleGame
         public void PlayGame()
         {
             _gameView.DisplayWelcomeScreen();
+            _gameView.DisplayMenu();
+
+            while (_usingMenu)
+            {
+               menuOptionChoice = GetMenuOptionChoice();
+
+                switch (menuOptionChoice)
+                {
+                    case MenuOption.None:
+                        break;
+
+                    case MenuOption.PlayNewRound:
+                        DisplayMenu.PlayNewRound = MenuOption.PlayNewRound;
+                        _gameView.DisplayPlayNewRound();
+                        break;
+
+                    case MenuOption.ViewCurrentGameResults:
+                        DisplayMenu.ViewCurrentGameResults = MenuOption.ViewCurrentGameResults;
+                        _gameView.DisplayCurrentGameResults();
+                        break;
+
+                    case MenuOption.ViewPastGameResultsScores:
+                        DisplayMenu.ViewPastGameResultsScores = MenuOption.ViewPastGameResultsScores;
+                        _gameView.DisplayPastGameResultsScores();
+                        break;
+
+                    case MenuOption.SaveGameResults:
+                        DisplayMenu.SaveGameResults = MenuOption.SaveGameResults;
+                        _gameView.DisplaySaveGameResults();
+                        break;
+
+                    case MenuOption.Quit:
+                        DisplayMenu.Quit = MenuOption.Quit;
+                        _gameView.DisplayQuit();
+                        break;
+
+                    default:
+                        break;
+                }
+            }
 
             while (_playingGame)
             {
@@ -130,6 +177,39 @@ namespace CodingActivity_TicTacToe_ConsoleGame
 
             _gameView.DisplayClosingScreen();
         }
+
+        /*private MenuOption GetMenuOptionChoice()
+        {
+            MenuOption playerActionChoice = MenuOption.None;
+
+            switch (DisplayMenu)
+            {
+                case DisplayMenu.CurrentMenu.MainMenu:
+                    playerActionChoice = _gameView.GetDisplayMenuChoice(DisplayMenu.MainMenu);
+                    break;
+
+                case DisplayMenu.CurrentMenu.ObjectMenu:
+                    playerActionChoice = _gameView.GetDisplayMenuChoice(DisplayMenu.ObjectMenu);
+                    break;
+
+                case DisplayMenu.CurrentMenu.NPCMenu:
+                    playerActionChoice = _gameView.GetDisplayMenuChoice(DisplayMenu.NPCMenu);
+                    break;
+
+                case DisplayMenu.CurrentMenu.PlayerMenu:
+                    playerActionChoice = _gameView.GetDisplayMenuChoice(DisplayMenu.PlayerMenu);
+                    break;
+
+                case DisplayMenu.CurrentMenu.AdminMenu:
+                    playerActionChoice = _gameView.GetDisplayMenuChoice(DisplayMenu.AdminMenu);
+                    break;
+
+                default:
+                    break;
+            }
+
+            return playerActionChoice;
+        }*/
 
         /// <summary>
         /// manage each new task based on the current game state
