@@ -173,18 +173,24 @@ namespace CodingActivity_TicTacToe_ConsoleGame
         /// <returns>true if a player has won</returns>
         private bool ThreeInARow(PlayerPiece playerPieceToCheck)
         {
-            // DEBUG
-            return false;
-
-            /*
             //
             // Check rows for player win
             //
             for (int row = 0; row < 3; row++)
             {
-                if (_positionState[row, 0] == playerPieceToCheck &&
-                    _positionState[row, 1] == playerPieceToCheck &&
-                    _positionState[row, 2] == playerPieceToCheck)
+                if (
+                    (_positionState[row, 0, 0] == playerPieceToCheck &&
+                    _positionState[row, 1, 0] == playerPieceToCheck &&
+                    _positionState[row, 2, 0] == playerPieceToCheck)
+                ||
+                   (_positionState[row, 0, 1] == playerPieceToCheck &&
+                    _positionState[row, 1, 1] == playerPieceToCheck &&
+                    _positionState[row, 2, 1] == playerPieceToCheck)
+                ||
+                   (_positionState[row, 0, 2] == playerPieceToCheck &&
+                    _positionState[row, 1, 2] == playerPieceToCheck &&
+                    _positionState[row, 2, 2] == playerPieceToCheck)
+                    )
                 {
                     return true;
                 }
@@ -195,9 +201,42 @@ namespace CodingActivity_TicTacToe_ConsoleGame
             //
             for (int column = 0; column < 3; column++)
             {
-                if (_positionState[0, column] == playerPieceToCheck &&
-                    _positionState[1, column] == playerPieceToCheck &&
-                    _positionState[2, column] == playerPieceToCheck)
+                if (
+                    (_positionState[0, column, 0] == playerPieceToCheck &&
+                    _positionState[1, column, 0] == playerPieceToCheck &&
+                    _positionState[2, column, 0] == playerPieceToCheck)
+                ||
+                    (_positionState[0, column, 1] == playerPieceToCheck &&
+                    _positionState[1, column, 1] == playerPieceToCheck &&
+                    _positionState[2, column, 1] == playerPieceToCheck)
+                ||
+                    (_positionState[0, column, 2] == playerPieceToCheck &&
+                    _positionState[1, column, 2] == playerPieceToCheck &&
+                    _positionState[2, column, 2] == playerPieceToCheck)
+                    )
+                {
+                    return true;
+                }
+            }
+
+            //
+            // Check depth for player win
+            //
+            for (int depth = 0; depth < 3; depth++)
+            {
+                if (
+                    (_positionState[0, 0, depth] == playerPieceToCheck &&
+                    _positionState[1, 0, depth] == playerPieceToCheck &&
+                    _positionState[2, 0, depth] == playerPieceToCheck)
+                ||
+                    (_positionState[0, 1, depth] == playerPieceToCheck &&
+                    _positionState[1, 1, depth] == playerPieceToCheck &&
+                    _positionState[2, 1, depth] == playerPieceToCheck)
+                ||
+                    (_positionState[0, 2, depth] == playerPieceToCheck &&
+                    _positionState[1, 2, depth] == playerPieceToCheck &&
+                    _positionState[2, 2, depth] == playerPieceToCheck)
+                    )
                 {
                     return true;
                 }
@@ -206,24 +245,50 @@ namespace CodingActivity_TicTacToe_ConsoleGame
             //
             // Check diagonals for player win
             //
-            if (
-                (_positionState[0, 0] == playerPieceToCheck &&
-                _positionState[1, 1] == playerPieceToCheck &&
-                _positionState[2, 2] == playerPieceToCheck)
+            for (int depth=0;depth<3;depth++)
+            {
+                if (
+                (_positionState[0, 0, depth] == playerPieceToCheck &&
+                _positionState[1, 1, depth] == playerPieceToCheck &&
+                _positionState[2, 2, depth] == playerPieceToCheck)
                 ||
-                (_positionState[0, 2] == playerPieceToCheck &&
-                _positionState[1, 1] == playerPieceToCheck &&
-                _positionState[2, 0] == playerPieceToCheck)
+                (_positionState[0, 2, depth] == playerPieceToCheck &&
+                _positionState[1, 1, depth] == playerPieceToCheck &&
+                _positionState[2, 0, depth] == playerPieceToCheck)
+                )
+                {
+                    return true;
+                }
+
+            }
+
+            if (
+                (_positionState[0, 0, 0] == playerPieceToCheck &&
+                _positionState[1, 1, 1] == playerPieceToCheck &&
+                _positionState[2, 2, 2] == playerPieceToCheck)
+                ||
+                (_positionState[0, 2, 0] == playerPieceToCheck &&
+                _positionState[1, 1, 1] == playerPieceToCheck &&
+                _positionState[2, 0, 2] == playerPieceToCheck)
+                ||
+                (_positionState[0, 2, 0] == playerPieceToCheck &&
+                _positionState[1, 1, 1] == playerPieceToCheck &&
+                _positionState[2, 0, 2] == playerPieceToCheck)
+                ||
+                (_positionState[0, 2, 0] == playerPieceToCheck &&
+                _positionState[1, 1, 1] == playerPieceToCheck &&
+                _positionState[2, 0, 2] == playerPieceToCheck)
                 )
             {
                 return true;
             }
 
+
             //
             // No Player Has Won
             //
 
-            return false;*/
+            return false;
         }
 
         /// <summary>
