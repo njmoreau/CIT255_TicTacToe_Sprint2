@@ -241,6 +241,16 @@ namespace CodingActivity_TicTacToe_ConsoleGame
                     return true;
                 }
             }
+            for (int column=0;column<3;column++)
+            {
+                for (int row=0;row<3;row++)
+                {
+                    if (_positionState[column, row, 0] == playerPieceToCheck &&
+                    _positionState[column, row, 1] == playerPieceToCheck &&
+                    _positionState[column, row, 2] == playerPieceToCheck)
+                        return true;
+                }
+            }
 
             //
             // Check diagonals for player win
