@@ -304,6 +304,12 @@ namespace CodingActivity_TicTacToe_ConsoleGame
             Console.WriteLine(Environment.NewLine + leftMargin + topBottom);
         }
 
+        public void DisplayGetUserMeuOption()
+        {
+            Console.WriteLine("What key would you like your menu key to be?");
+            Console.Read();
+        }
+
         /// <summary>
         /// display the current game board
         /// </summary>
