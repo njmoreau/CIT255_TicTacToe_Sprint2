@@ -407,6 +407,30 @@ namespace CodingActivity_TicTacToe_ConsoleGame
         }
 
         /// <summary>
+        /// Displays the rules of 3x3x3 Tic-Tac-Toe
+        /// </summary>
+        private void DisplayViewRules()
+        {
+            ConsoleUtil.HeaderText = "Game Rules";
+            ConsoleUtil.DisplayReset();
+
+            DisplayMessageBox("The rules of the game are to get 3 in a row in any way you can. Each player goes back and forth taking their turn until someone wins or its a Cat's game. Any way you can get 3 in a row (that's not crossing the face of the cube) is considered a win.");
+            DisplayContinuePrompt();
+        }
+
+        /// <summary>
+        /// Displays the menu
+        /// </summary>
+        private void DisplayMenu()
+        {
+            DisplayNewRoundPrompt();
+            DisplayCurrentGameStatus();
+            DisplayExitPrompt();
+
+
+        }
+
+        /// <summary>
         /// Get a player's position choice within the correct range of the array
         /// Note: The ConsoleView is allowed access to the GameboardPosition struct.
         /// </summary>
