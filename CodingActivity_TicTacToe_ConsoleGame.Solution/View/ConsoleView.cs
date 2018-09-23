@@ -185,7 +185,7 @@ namespace CodingActivity_TicTacToe_ConsoleGame
 
             sb.Clear();
             sb.AppendFormat("This application is designed to allow two players to play ");
-            sb.AppendFormat("a game of tic-tac-toe. The rules are the standard rules for the ");
+            sb.AppendFormat("a game of 3D tic-tac-toe. The rules are the standard rules for the ");
             sb.AppendFormat("game with each player taking a turn.");
             ConsoleUtil.DisplayMessage(sb.ToString());
             Console.WriteLine();
@@ -304,12 +304,6 @@ namespace CodingActivity_TicTacToe_ConsoleGame
             Console.WriteLine(Environment.NewLine + leftMargin + topBottom);
         }
 
-        public void DisplayGetUserMeuOption()
-        {
-            Console.WriteLine("What key would you like your menu key to be?");
-            Console.Read();
-        }
-
         /// <summary>
         /// display the current game board
         /// </summary>
@@ -398,6 +392,7 @@ namespace CodingActivity_TicTacToe_ConsoleGame
                 {
                     validResponse = true;
                     yesNoChoice = false;
+                    DisplayClosingScreen();
                 }
                 else
                 {
@@ -427,13 +422,71 @@ namespace CodingActivity_TicTacToe_ConsoleGame
         /// <summary>
         /// Displays the menu
         /// </summary>
-        public void DisplayMenu()
+        public void DisplayMenu(int roundsPlayed, int playerXWins, int playerOWins, int catsGames)
         {
-            DisplayNewRoundPrompt();
-            DisplayCurrentGameStatus();
-            DisplayExitPrompt();
+            bool inMenu = true;
+            while (inMenu == true)
+            {
+                string menuChoice;
+                ConsoleUtil.HeaderText = "Main Menu";
+                ConsoleUtil.DisplayReset();
 
+                ConsoleUtil.DisplayMessage("Main Menu");
+                Console.WriteLine();
+                ConsoleUtil.DisplayMessage("1: Play New Round");
+                ConsoleUtil.DisplayMessage("2: Game Results");
+                ConsoleUtil.DisplayMessage("3: Quit");
+                Console.WriteLine();
 
+                ConsoleUtil.DisplayPromptMessage("Please enter your menu choice: ");
+                menuChoice = Console.ReadLine();
+
+            
+                switch (menuChoice)
+                {
+                    case "1":
+                        menuChoice = "1";
+                        DisplayViewRules();
+                        inMenu = false;
+                        break;
+
+                    case "2":
+                        menuChoice = "2";
+                        if (roundsPlayed < 1)
+                        {
+                            ConsoleUtil.HeaderText = "Main Menu";
+                            ConsoleUtil.DisplayReset();
+
+                            ConsoleUtil.DisplayMessage("You must play at least one round to view game results.");
+                            Console.WriteLine();
+                            DisplayContinuePrompt();
+                            break;
+                        }
+
+                        else
+                        {
+                            DisplayCurrentGameStatus(roundsPlayed, playerXWins, playerOWins, catsGames);
+                            inMenu = false;
+                            break;
+                        }
+                        
+
+                    case "3":
+                        menuChoice = "3";
+                        DisplayExitPrompt();
+                        inMenu = false;
+                        break;
+
+                    default:
+                        ConsoleUtil.HeaderText = "Main Menu";
+                        ConsoleUtil.DisplayReset();
+
+                        ConsoleUtil.DisplayMessage("Please use only 1, 2, or 3 for your choice");
+                        Console.WriteLine();
+                        DisplayContinuePrompt();
+                        break;
+                }
+            }
         }
 
         /// <summary>
@@ -451,14 +504,14 @@ namespace CodingActivity_TicTacToe_ConsoleGame
             //
             // Get row number from player.
             //
-            gameboardPosition.Row = PlayerCoordinateChoice("Row");
+            gameboardPosition.Row = PlayerCoordinateChoice("Column");
 
             //
             // Get column number.
             //
             if (CurrentViewState != ViewState.PlayerUsedMaxAttempts)
             {
-                gameboardPosition.Column = PlayerCoordinateChoice("Column");
+                gameboardPosition.Column = PlayerCoordinateChoice("Row");
 
                 if (CurrentViewState != ViewState.PlayerUsedMaxAttempts)
                 {
